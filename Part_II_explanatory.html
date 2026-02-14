@@ -7925,6 +7925,7 @@ a.anchor-link {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="Visualization-1:-When-Do-Delays-Strike?">Visualization 1: When Do Delays Strike?<a class="anchor-link" href="#Visualization-1:-When-Do-Delays-Strike?">¶</a></h2><p>Delays are not randomly distributed throughout the day. They follow a predictable pattern driven by the cascading nature of airline operations. Aircraft that depart late in the morning continue to fall further behind schedule as the day progresses. This heatmap reveals the average arrival delay for every combination of departure hour and day of the week.</p>
+<p><strong>Design choice:</strong> A heatmap was chosen over a line chart or grouped bar chart because it compactly displays the interaction of two categorical/ordinal variables (day and hour) with a continuous outcome (delay). The <code>YlOrRd</code> color scale intuitively maps to severity (yellow=mild, red=severe), and annotated cell values allow precise comparison. This is more information-dense than 7 separate line charts would be.</p>
 </div>
 </div>
 </div>
@@ -7985,6 +7986,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Early morning flights (5-8 AM) consistently show the lowest average delays across all days of the week. As the day progresses, delays build steadily, reaching their peak between 4 PM and 9 PM. This "cascade effect" happens because aircraft fly multiple segments per day -- a delay on the first flight ripples through all subsequent flights using that aircraft. Friday and Sunday evenings are particularly prone to delays, coinciding with business and leisure travel peaks.</p>
 <h2 id="Visualization-2:-The-Cascade-Effect----Departure-Delay-vs.-Arrival-Delay">Visualization 2: The Cascade Effect -- Departure Delay vs. Arrival Delay<a class="anchor-link" href="#Visualization-2:-The-Cascade-Effect----Departure-Delay-vs.-Arrival-Delay">¶</a></h2><p>When a flight departs late, does it arrive equally late? Or can airlines make up time in the air? This density plot examines the relationship between departure and arrival delays across all flights in the dataset.</p>
+<p><strong>Design choice:</strong> A hexbin density plot was chosen over a raw scatter plot because with 2 million data points, individual dots would create an unreadable mass. The hexagonal binning with logarithmic color scale reveals density patterns that a scatter plot would obscure, while the reference line and text annotations add quantitative context.</p>
 </div>
 </div>
 </div>
@@ -8059,6 +8061,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>The relationship between departure and arrival delays is remarkably strong (r &gt; 0.9). Most of the density falls just below the diagonal reference line, meaning airlines do recover some lost time during flight -- on average about 5 minutes. However, this recovery is modest: a flight that departs 60 minutes late will still arrive roughly 55 minutes late. The hexbin density clearly shows the concentration of on-time flights near (0, 0), with a thin but long tail of severely delayed flights extending to the upper right.</p>
 <h2 id="Visualization-3:-What-Causes-Delays?">Visualization 3: What Causes Delays?<a class="anchor-link" href="#Visualization-3:-What-Causes-Delays?">¶</a></h2><p>Not all delays are created equal. The BTS categorizes delays into five causes: carrier-related, weather, National Airspace System (NAS), security, and late aircraft. Understanding which causes contribute the most total delay minutes reveals where the biggest improvement opportunities lie.</p>
+<p><strong>Design choice:</strong> A grouped bar chart was chosen to enable direct comparison of delay causes within each airline. Color-coding by cause type (red for late aircraft to draw attention to the dominant cause) makes the key pattern immediately visible. Airlines are ordered by total delay to create a natural reading flow from worst to best.</p>
 </div>
 </div>
 </div>
@@ -8139,6 +8142,7 @@ a.anchor-link {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Across all major airlines, <strong>late aircraft delays</strong> (shown in red) are consistently the largest contributor to delay minutes among delayed flights. This reflects a systemic challenge in hub-and-spoke airline networks: when one flight arrives late, the aircraft assigned to the next departure is unavailable, creating a cascade of delays through the day. Carrier-related delays (maintenance, crew, fueling) are the second-largest cause. Weather and NAS delays vary more by airline, depending on which hubs an airline operates from. Security delays are negligible for all carriers.</p>
 <h2 id="Visualization-4:-Seasonal-Patterns-in-Delay-Rates">Visualization 4: Seasonal Patterns in Delay Rates<a class="anchor-link" href="#Visualization-4:-Seasonal-Patterns-in-Delay-Rates">¶</a></h2><p>Travel demand and weather conditions change dramatically by season. This chart shows how the percentage of delayed flights varies month by month for the five busiest airlines.</p>
+<p><strong>Design choice:</strong> A multi-line chart was chosen over a grouped bar chart because it emphasizes the seasonal trend shape and makes it easy to see that all carriers follow the same pattern. Shaded regions for summer and holiday periods provide immediate context. The <code>Set2</code> color palette ensures lines are distinguishable even for colorblind readers.</p>
 </div>
 </div>
 </div>
